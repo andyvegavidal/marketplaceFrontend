@@ -7,15 +7,15 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5050',
+        target: 'http://localhost:5050', // for local dev only
         changeOrigin: true,
-        secure: false,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-        }
+        secure: false
       }
     }
+  },
+  preview: {
+    allowedHosts: ['.railway.app'],        // ✅ allow Railway URLs
+    port: process.env.PORT || 3000,        // ✅ Railway provides a port
+    host: '0.0.0.0'                        // ✅ listen on all interfaces
   }
 })
